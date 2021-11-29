@@ -6,7 +6,7 @@ To use use, you must follow these [steps](https://dtcooper.github.io/raspotify/#
 
 **1. Installation:**
 ```shellscript
-    curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
+$ curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
 ```
 **2. Getting your username:**
 Open [Spotify](https://www.spotify.com) website and select [Account overview](https://www.spotify.com/us/account/overview)
@@ -17,7 +17,7 @@ Copy your username:
 **3. Configuring your system:**
 Edit configuration file and set your username and password:
 ```shellscript
-sudo nano /etc/default/raspotify
+$ sudo nano /etc/default/raspotify
 ```
 You must edit the following line in the config file, replacing the USERNAME by your username (last step) and PASSWORD by your password:
 ```shellscript
@@ -25,7 +25,7 @@ OPTIONS="--username USERNAME --password PASSWORD"
 ```
 **4. Restarting the service:**
 ```shellscript
-sudo service raspotify restart
+$ sudo service raspotify restart
 ```
 
 **5. Testing:**
@@ -41,7 +41,7 @@ My Raspberry distribution is *Raspbian GNU/Linux 9.13 (stretch)*.
 I used a small SD card with 2GB and it is configured as read only. It avoids problems when it is turned off due to lack of power.
 Then I created a link to raspberry use the *tmp* folder as cache (it must be done only once).
 ```reaspberry
-$ ln -vs /var/cache/raspotify /tmp/raspotify
+$ sudo ln -vs /var/cache/raspotify /tmp/raspotify
 /var/cache/raspotify -> /tmp/raspotify/
 ```
 And changed the systemd's init script to create this temporary folder before start the *librespot*.
