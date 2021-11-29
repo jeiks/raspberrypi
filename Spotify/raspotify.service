@@ -1,0 +1,41 @@
+[Unit]
+Description=Raspotify (Spotify Connect Client)
+Documentation=https://github.com/dtcooper/raspotify
+Documentation=https://github.com/librespot-org/librespot
+Documentation=https://github.com/dtcooper/raspotify/wiki
+Documentation=https://github.com/librespot-org/librespot/wiki/Options
+Requires=network.target
+After=network.target
+Requires=sound.target
+After=sound.target
+
+[Service]
+User=raspotify
+Group=raspotify
+
+Restart=always
+RestartSec=2
+
+PermissionsStartOnly=true
+ExecStartPre=+/bin/rm -rf /tmp/raspotify
+ExecStartPre=+/bin/mkdir -m 0755 -p /tmp/raspotify
+ExecStartPre=+/bin/chown raspotify:raspotify /tmp/raspotify
+
+DeviceAllow=char-alsa rw
+DeviceAllow=/dev/null r
+DeviceAllow=/dev/random r
+DeviceAllow=/dev/urandom r
+
+Environment="DEVICE_NAME=Raspotify (%H)"
+Environment="BITRATE=320"
+Environment="CACHE_ARGS=--disable-audio-cache"
+Environment="VOLUME_ARGS=--enable-volume-normalisation --volume-ctrl linear --initial-volume 50"
+Environment="BACKEND_ARGS=--backend alsa"
+Environment="DEVICE_TYPE=speaker"
+
+EnvironmentFile=-/etc/default/raspotify
+
+ExecStart=/usr/bin/librespot --name ${DEVICE_NAME} --device-type ${DEVICE_TYPE} $BACKEND_ARGS --bitrate ${BITRATE} $CACHE_ARGS $VOLUME_ARGS $OPTIONS
+
+[Install]
+WantedBy=multi-user.target
