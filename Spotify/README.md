@@ -37,7 +37,8 @@ Now, you can go to your cellphone and choose raspotify to play your music.
 
 *I make no warranties, promises or other warranties on this tool. Use of this tool is at your own risk and expense.*
 
-My Raspberry SD card is small (only 2GB) and read only to avoid problems when it is turned off due to lack of power.
+My Raspberry distribution is *Raspbian GNU/Linux 9.13 (stretch)*.
+I used a small SD card with 2GB and it is configured as read only. It avoids problems when it is turned off due to lack of power.
 Then I created a link to raspberry use the *tmp* folder as cache (it must be done only once).
 ```reaspberry
 $ ln -vs /var/cache/raspotify /tmp/raspotify
