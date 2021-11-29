@@ -11,3 +11,4 @@ Feel free if you want to contribute or contact me.
 ### Tricks (and notes):
 * [Sound output](sound_output.md)
 * [Spotify](Spotify)
+* [Update Date and Time automatically](update_raspberry_datetime)
