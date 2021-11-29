@@ -1,0 +1,38 @@
+#!/bin/bash -e
+### BEGIN INIT INFO
+# Provides:          update_clock
+# Required-Start:    $network $remote_fs $syslog ntp
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      
+# Short-Description: Update Clock
+# Description:       Ensure the clock is ok
+### END INIT INFO
+
+PATH='/sbin:/bin:/usr/bin:/usr/sbin'
+RUN_DIR='/tmp'
+UPDATE_TOOL='/usr/local/bin/update_clock.py'
+
+update_clock() {
+  if ping -c1 google.com >/dev/null 2>/dev/null;then
+    $UPDATE_TOOL
+  fi
+}
+
+case "$1" in
+start|reload|force-reload|restart)
+        update_clock
+        ;;
+
+stop)
+        ;;
+
+*)
+        echo "Usage: /etc/init.d/update-clock {start|stop|reload|restart|force-reload}"
+        exit 1
+        ;;
+esac
+
+exit 0
+
+# vim: noet ts=8
